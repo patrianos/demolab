@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Laboratorio Clínico Vitalis Health - Estudios clínicos, análisis de sangre, resultados rápidos y precisos. Agenda tu cita por WhatsApp.">
+  <meta name="keywords" content="laboratorio clínico, análisis de sangre, estudios médicos, glucosa, perfil lipídico, biometría hemática, tiroides">
+  <meta name="author" content="Vitalis Health">
+  <title>Vitalis Health | Laboratorio Clínico - Análisis y Resultados</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f9ff;
+      color: #1a2c3e;
+      line-height: 1.5;
+    }
+    :root {
+      --primary: #0d6b5e;
+      --primary-dark: #0a554a;
+      --primary-light: #b5dfd8;
+      --secondary: #2c4f6e;
+      --accent: #f3b33d;
+      --gray-100: #f8fafc;
+      --gray-200: #eef2f6;
+      --shadow: 0 12px 28px rgba(0,0,0,0.06);
+      --whatsapp-green: #25D366;
+      --whatsapp-dark: #128C7E;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    /* top bar responsivo - MEJORA CONTRASTE */
+    .top-bar {
+      background: #1a3a4f;
+      color: white;
+      padding: 8px 0;
+      font-size: 0.75rem;
+    }
+    .top-bar .container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .social-links a {
+      color: white;
+      margin-right: 14px;
+      transition: 0.2s;
+      text-decoration: none;
+    }
+    .social-links a:hover { color: #f3b33d; text-decoration: underline; }
+    .contact-small i { margin-right: 4px; }
+
+    /* header hamburguesa */
+    .header {
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .logo h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .logo span {
+      font-size: 0.7rem;
+      display: block;
+      color: var(--secondary);
+    }
+    /* menu hamburguesa */
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--primary);
+      display: none;
+    }
+    .nav-menu {
+      display: flex;
+      gap: 1.2rem;
+      list-style: none;
+    }
+    .nav-menu a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1f3b4a;
+      transition: 0.2s;
+      font-size: 0.9rem;
+    }
+    .nav-menu a:hover { color: var(--primary); text-decoration: underline; }
+
+    /* buscador accesible */
+    .search-wrapper {
+      background: var(--gray-200);
+      border-radius: 60px;
+      padding: 6px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .search-wrapper label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+    .search-wrapper input {
+      border: none;
+      background: transparent;
+      padding: 8px 0;
+      width: 170px;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .search-wrapper button {
+      background: none;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    /* hero banner */
+    .hero {
+      background: linear-gradient(105deg, #e0f0ec 0%, #cbe5df 100%);
+      padding: 48px 0;
+    }
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+    }
+    .hero-text { flex: 1; }
+    .hero-text h2 { font-size: 2rem; color: #1a3a4f; margin-bottom: 16px; }
+    
+    /* Botones principales mejorados */
+    .btn-cta {
+      background: var(--primary);
+      color: white;
+      padding: 12px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(13, 107, 94, 0.25);
+    }
+    .btn-cta:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(13, 107, 94, 0.35);
+    }
+    .btn-cta i {
+      font-size: 1.2rem;
+    }
+    
+    .btn-wa-hero {
+      background: var(--whatsapp-green);
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+    .btn-wa-hero:hover {
+      background: var(--whatsapp-dark);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+    }
+    
+    .hero-cards { display: flex; gap: 20px; flex: 1; justify-content: center; flex-wrap: wrap; }
+    .doctor-card {
+      background: white;
+      border-radius: 30px;
+      padding: 18px;
+      text-align: center;
+      width: 150px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s;
+    }
+    .doctor-card:hover { transform: translateY(-5px); }
+
+    /* sección estudios */
+    .estudios-section {
+      padding: 60px 0;
+      background: white;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 1.9rem;
+      margin-bottom: 40px;
+      color: #1a3a4f;
+    }
+    .search-feedback {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 500;
+    }
+    .estudios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 24px;
+    }
+    .card-estudio {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: all 0.25s;
+      border: 1px solid #e9edf2;
+    }
+    .card-estudio:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+    }
+    .card-estudio h3 {
+      color: var(--primary);
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+    .card-estudio p {
+      color: #2c4a5e;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+    .btn-whatsapp-estudio {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 8px rgba(37,211,102,0.3);
+    }
+    .btn-whatsapp-estudio:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 14px rgba(37,211,102,0.4);
+      background: linear-gradient(135deg, #20b859 0%, #0e6e5e 100%);
+    }
+
+    /* pasos */
+    .steps {
+      background: var(--gray-100);
+      padding: 60px 0;
+    }
+    .steps-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 30px;
+    }
+    .step-card {
+      background: white;
+      border-radius: 30px;
+      padding: 28px 20px;
+      width: 220px;
+      text-align: center;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+      transition: 0.2s;
+    }
+    .step-card:hover { transform: translateY(-5px); }
+
+    /* FAQs acordeón */
+    .faq-section {
+      padding: 60px 0;
+      background: white;
+    }
+    .faq-item {
+      background: var(--gray-100);
+      margin-bottom: 14px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .faq-question {
+      background: white;
+      padding: 18px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .faq-question i {
+      transition: transform 0.3s;
+      color: var(--primary);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      padding: 0 24px;
+      background: #fefefe;
+    }
+    .faq-answer p {
+      padding: 18px 0;
+      color: #2c3e44;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+    }
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    /* formulario WhatsApp directo - ACCESIBLE con labels */
+    .form-wa {
+      background: var(--primary-light);
+      padding: 50px 0;
+    }
+    .form-card {
+      max-width: 580px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 40px;
+      padding: 36px 30px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #1a3a4f;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid #d1d9e6;
+      border-radius: 60px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: border 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(13,107,94,0.2);
+    }
+    .btn-wa-submit {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 60px;
+      font-weight: bold;
+      width: 100%;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-wa-submit:hover {
+      transform: scale(1.01);
+      background: linear-gradient(135deg, #20b859, #0e6e5e);
+    }
+
+    /* footer */
+    footer {
+      background: #0e2a2a;
+      color: #ccc;
+      padding: 40px 0 24px;
+    }
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: space-between;
+    }
+    .footer-grid a {
+      text-decoration: none;
+      color: #ddd;
+    }
+    .footer-grid a:hover { color: white; text-decoration: underline; }
+    
+    /* BOTON FLOTANTE WHATSAPP - NUEVO DISEÑO RESPONSIVO, BONITO Y FUNCIONAL */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: linear-gradient(145deg, #25D366, #1da15a);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      color: white;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2), 0 0 0 4px rgba(37,211,102,0.2);
+      z-index: 999;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      animation: pulse-wa 1.8s infinite;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.08) rotate(2deg);
+      background: linear-gradient(145deg, #1da15a, #128C7E);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.25), 0 0 0 6px rgba(37,211,102,0.3);
+    }
+    @keyframes pulse-wa {
+      0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+      }
+      70% {
+        box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+      }
+    }
+    
+    /* Tooltip para escritorio */
+    .whatsapp-float::after {
+      content: "¿Necesitas ayuda?";
+      position: absolute;
+      right: 75px;
+      background: #1f2e3a;
+      color: white;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 30px;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      pointer-events: none;
+    }
+    .whatsapp-float:hover::after {
+      opacity: 1;
+      visibility: visible;
+      right: 80px;
+    }
+    
+    @media (max-width: 860px) {
+      .menu-toggle { display: block; }
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        background: white;
+        width: 80%;
+        height: 100vh;
+        flex-direction: column;
+        padding: 30px 25px;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+        transition: 0.3s;
+        z-index: 1000;
+        gap: 1.8rem;
+      }
+      .nav-menu.active {
+        left: 0;
+      }
+      .header-container {
+        flex-wrap: wrap;
+      }
+      .search-wrapper {
+        order: 3;
+        width: 100%;
+        margin-top: 12px;
+      }
+      .search-wrapper input { width: 100%; }
+      .hero-text h2 { font-size: 1.6rem; }
+      .whatsapp-float {
+        width: 58px;
+        height: 58px;
+        font-size: 30px;
+        bottom: 22px;
+        right: 22px;
+      }
+      .whatsapp-float::after {
+        display: none;
+      }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .hero-text .btn-cta {
+        display: inline-flex;
+        margin-bottom: 12px;
+      }
+      .whatsapp-float {
+        width: 52px;
+        height: 52px;
+        font-size: 28px;
+        bottom: 18px;
+        right: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="container">
+    <div class="social-links" aria-label="Redes sociales">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+    <div class="contact-small">
+      <i class="fas fa-map-marker-alt"></i> Av. Río Mixcoac #310, CDMX | <i class="fab fa-whatsapp"></i> +52 55 1234 5678
+    </div>
+  </div>
+</div>
+
+<header class="header">
+  <div class="header-container">
+    <div class="logo">
+      <h1>Vitalis Health <i class="fas fa-heartbeat"></i></h1>
+      <span>Laboratorio Clínico + Confianza</span>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menú de navegación" aria-expanded="false"><i class="fas fa-bars"></i></button>
+    <ul class="nav-menu" id="navMenu" role="navigation" aria-label="Navegación principal">
+      <li><a href="#">INICIO</a></li>
+      <li><a href="#estudios">ESTUDIOS</a></li>
+      <li><a href="#">PROMOCIONES</a></li>
+      <li><a href="#formulario">AGENDA CITA</a></li>
+      <li><a href="#">CONSULTA MÉDICA</a></li>
+      <li><a href="#faq">PREGUNTAS FRECUENTES</a></li>
+      <li><a href="#">CONTACTO</a></li>
+    </ul>
+    <div class="search-wrapper">
+      <label for="buscadorAnalisis">Buscar estudio</label>
+      <input type="text" id="buscadorAnalisis" placeholder="Busca tu estudio (ej: glucosa, tiroides...)" autocomplete="off">
+      <button id="btnBuscar" aria-label="Realizar búsqueda"><i class="fas fa-search"></i></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <h2>Tu salud es prioridad <br> Resultados en 24 hrs</h2>
+      <p>Más de 200 análisis disponibles con atención personalizada. Agenda tu toma de muestra en laboratorio o a domicilio.</p>
+      <a href="#formulario" class="btn-cta btn-wa-hero" aria-label="Agendar cita por WhatsApp"><i class="fab fa-whatsapp"></i> Agenda tu cita ahora</a>
+    </div>
+    <div class="hero-cards">
+      <div class="doctor-card" tabindex="0"><i class="fas fa-user-md fa-3x" style="color:var(--primary);"></i><h4>Dr. Serrate</h4><small>Consulta integral</small></div>
+      <div class="doctor-card" tabindex="0"><i class="fas fa-flask fa-3x" style="color:var(--primary);"></i><h4>QFB Leticia</h4><small>Estudios de calidad</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="estudios" class="estudios-section">
+  <div class="container">
+    <h2 class="section-title">📋 Nuestros análisis clínicos</h2>
+    <div id="resultadoBusqueda" class="search-feedback" role="status" aria-live="polite"></div>
+    <div id="estudiosContainer" class="estudios-grid"></div>
+  </div>
+</section>
+
+<section class="steps">
+  <div class="container">
+    <h3 class="section-title" style="font-size:1.7rem;">📌 Cotiza tu estudio en 3 pasos</h3>
+    <div class="steps-grid">
+      <div class="step-card"><i class="fas fa-search fa-2x" style="color:var(--primary);"></i><h4>1. Elige estudio</h4><p>Identifica el que necesitas</p></div>
+      <div class="step-card"><i class="fas fa-edit fa-2x" style="color:var(--primary);"></i><h4>2. Completa datos</h4><p>Formulario rápido</p></div>
+      <div class="step-card"><i class="fab fa-whatsapp fa-2x" style="color:#25D366;"></i><h4>3. Confirmamos vía WhatsApp</h4><p>Te contactamos al instante</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="faq-section">
+  <div class="container">
+    <h2 class="section-title">❓ Preguntas frecuentes</h2>
+    <div id="faqContainer">
+      <div class="faq-item">
+        <div class="faq-question" role="button" tabindex="0" aria-expanded="true">¿Necesito ayuno para algún estudio? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>Depende del análisis. Para glucosa y perfil lipídico se requieren 8 horas de ayuno. Nuestro equipo te indicará al agendar.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" role="button" tabindex="0" aria-expanded="false">¿Realizan toma de muestras a domicilio? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>Sí, tenemos cobertura en CDMX y zona metropolitana. El costo adicional es mínimo, agenda a través de WhatsApp.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" role="button" tabindex="0" aria-expanded="false">¿Cuánto tiempo tardan los resultados? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>La mayoría de los resultados están listos en 24 horas hábiles. Pruebas especiales pueden tardar hasta 48 hrs.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" role="button" tabindex="0" aria-expanded="false">¿Aceptan seguros médicos? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-answer"><p>Trabajamos con varias aseguradoras. Contáctanos y te ayudamos con la facturación.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="formulario" class="form-wa">
+  <div class="container">
+    <div class="form-card">
+      <h3><i class="fab fa-whatsapp" style="color:#25D366;"></i> Agenda tu estudio vía WhatsApp</h3>
+      <p>Completa el formulario y serás redirigido para confirmar tu cita.</p>
+      <form id="waForm" aria-label="Formulario de contacto para WhatsApp">
+        <div class="form-group">
+          <label for="nombre">Nombre completo *</label>
+          <input type="text" id="nombre" placeholder="Ej: María González" required>
+        </div>
+        <div class="form-group">
+          <label for="telefono">Número de teléfono *</label>
+          <input type="tel" id="telefono" placeholder="55 1234 5678" required>
+        </div>
+        <div class="form-group">
+          <label for="estudioSelect">Selecciona un estudio *</label>
+          <select id="estudioSelect" required>
+            <option value="">-- Selecciona un estudio --</option>
+            <option>Biometría Hemática</option>
+            <option>Glucosa</option>
+            <option>Perfil lipídico</option>
+            <option>Prueba de tiroides</option>
+            <option>Examen general de orina</option>
+            <option>Prueba COVID-19</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Indicaciones adicionales *</label>
+          <textarea rows="2" id="mensaje" placeholder="Ej: Domicilio, horario preferido, alergias..." required></textarea>
+        </div>
+        <button type="submit" class="btn-wa-submit" aria-label="Enviar y contactar por WhatsApp"><i class="fab fa-whatsapp"></i> Enviar y contactar por WhatsApp</button>
+      </form>
+      <p style="font-size:12px; margin-top:16px;">Número genérico: +52 55 9876 5432 (demo)</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-grid">
+    <div><h4>Vitalis Health</h4><p>Laboratorio con excelencia</p><p>© 2025 - Calidad y confianza</p></div>
+    <div><h4>Enlaces</h4><a href="#estudios">Estudios</a><br><a href="#faq">FAQ</a><br><a href="#" aria-label="Aviso de privacidad">Aviso de privacidad</a></div>
+    <div><h4>Contacto</h4><p><i class="fab fa-whatsapp"></i> +52 55 9876 5432</p><p><i class="fas fa-envelope"></i> hola@vitalishealth.mx</p></div>
+  </div>
+  <div class="container" style="text-align:center; margin-top:30px; font-size:12px;">Cofepris 230904538X1278 | Q.F.B. Mariana López Ced. 1234567</div>
+</footer>
+
+<!-- Botón flotante WhatsApp mejorado y responsivo -->
+<a href="https://wa.me/525598765432?text=Hola%20Vitalis%20Health%2C%20me%20interesa%20informaci%C3%B3n%20sobre%20estudios%20cl%C3%ADnicos" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+  const estudiosData = [
+    { nombre: "Biometría Hemática completa", descripcion: "Evaluación de células sanguíneas. Ideal para chequeo general.", precioRef: "$290 MXN", waMsg: "Hola, quiero información sobre Biometría Hemática" },
+    { nombre: "Glucosa en sangre", descripcion: "Medición de niveles de azúcar. Ayuno 8 horas.", precioRef: "$150 MXN", waMsg: "Hola, me interesa el estudio de Glucosa" },
+    { nombre: "Perfil lipídico", descripcion: "Colesterol total, HDL, LDL y triglicéridos.", precioRef: "$380 MXN", waMsg: "Hola, quiero agendar Perfil lipídico" },
+    { nombre: "Prueba de Tiroides (TSH)", descripcion: "Evaluación de función tiroidea.", precioRef: "$420 MXN", waMsg: "Necesito estudio de Tiroides TSH" },
+    { nombre: "Examen General de Orina", descripcion: "Detección de infecciones o anomalías.", precioRef: "$210 MXN", waMsg: "Información sobre Examen de Orina" },
+    { nombre: "Prueba COVID-19 (Antígeno)", descripcion: "Resultado en 30 minutos.", precioRef: "$450 MXN", waMsg: "Quiero prueba COVID Antígeno" },
+    { nombre: "Ácido Úrico", descripcion: "Control de gota o riesgo renal.", precioRef: "$170 MXN", waMsg: "Información sobre Ácido Úrico" },
+    { nombre: "Perfil Hepático", descripcion: "Evaluación de enzimas hepáticas.", precioRef: "$550 MXN", waMsg: "Necesito Perfil Hepático" }
+  ];
+
+  const estudiosContainer = document.getElementById('estudiosContainer');
+  const busquedaInput = document.getElementById('buscadorAnalisis');
+  const btnBuscar = document.getElementById('btnBuscar');
+  const resultadoFeedback = document.getElementById('resultadoBusqueda');
+  const numeroWhatsAppGenerico = "525598765432";
+
+  function renderEstudios(filtro = "") {
+    const term = filtro.toLowerCase().trim();
+    let filtered = estudiosData;
+    if (term !== "") {
+      filtered = estudiosData.filter(est => est.nombre.toLowerCase().includes(term) || est.descripcion.toLowerCase().includes(term));
+      resultadoFeedback.innerHTML = filtered.length ? `🔍 ${filtered.length} resultado(s) para "${filtro}"` : `❌ No se encontraron estudios con "${filtro}". Contáctanos para más opciones.`;
+    } else {
+      resultadoFeedback.innerHTML = "✨ Encuentra tu análisis y haz clic en WhatsApp para contactarnos directamente.";
+    }
+
+    if (filtered.length === 0) {
+      estudiosContainer.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px;">No hay coincidencias, pero podemos ayudarte. <i class="fab fa-whatsapp"></i> Escríbenos</div>`;
+      return;
+    }
+
+    estudiosContainer.innerHTML = filtered.map(est => `
+      <div class="card-estudio">
+        <h3><i class="fas fa-vial"></i> ${est.nombre}</h3>
+        <p>${est.descripcion} <strong>${est.precioRef}</strong></p>
+        <button class="btn-whatsapp-estudio" data-wamsg="${est.waMsg}" aria-label="Consultar y agendar ${est.nombre} por WhatsApp">
+          <i class="fab fa-whatsapp"></i> Consultar y agendar
+        </button>
+      </div>
+    `).join('');
+
+    document.querySelectorAll('.btn-whatsapp-estudio').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const msg = btn.getAttribute('data-wamsg');
+        const urlWA = `https://wa.me/${numeroWhatsAppGenerico}?text=${encodeURIComponent(msg + " - Me interesa agendar este estudio en Vitalis Health.")}`;
+        window.open(urlWA, '_blank');
+      });
+    });
+  }
+
+  function handleSearch() { renderEstudios(busquedaInput.value); }
+  btnBuscar.addEventListener('click', handleSearch);
+  busquedaInput.addEventListener('keyup', (e) => { if(e.key === 'Enter') handleSearch(); });
+  renderEstudios("");
+
+  const waForm = document.getElementById('waForm');
+  waForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById('nombre').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const estudio = document.getElementById('estudioSelect').value;
+    const mensajeExt = document.getElementById('mensaje').value.trim();
+    if(!nombre || !telefono || !estudio || !mensajeExt) {
+      alert("Por favor completa todos los campos");
+      return;
+    }
+    const textoWA = `Hola Vitalis Health, soy ${nombre} (tel: ${telefono}). Deseo agendar el estudio: ${estudio}. Información adicional: ${mensajeExt}. Por favor contáctenme.`;
+    window.open(`https://wa.me/${numeroWhatsAppGenerico}?text=${encodeURIComponent(textoWA)}`, '_blank');
+  });
+
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+  menuToggle.addEventListener('click', () => {
+    const expanded = navMenu.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', expanded);
+  });
+  document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', () => navMenu.classList.remove('active'));
+  });
+
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const questionDiv = item.querySelector('.faq-question');
+    questionDiv.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      faqItems.forEach(i => {
+        i.classList.remove('active');
+        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+      if (!isActive) {
+        item.classList.add('active');
+        questionDiv.setAttribute('aria-expanded', 'true');
+      } else {
+        questionDiv.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+  if(faqItems.length) {
+    faqItems[0].classList.add('active');
+    faqItems[0].querySelector('.faq-question').setAttribute('aria-expanded', 'true');
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if(href === "#" || href === "") return;
+      const target = document.querySelector(href);
+      if(target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
+```
